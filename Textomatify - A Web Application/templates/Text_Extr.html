@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='stylesheets/Text_Extr.css') }}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+    <title>Text Extracting Tool</title>
+</head>
+
+<body>
+
+    <!-- Nabar -->
+    <nav class="navbar navbar-expand-xl navbar-dark no-bg">
+        <span class="icon-name"><strong>TEXTIFY</strong></span>
+    
+        <div id="mySidenav" class="sidenav bg-dark font">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="sidenav-content mt-5 ml-2">
+              <a href="/Extract_Text">Text Extraction Tool</a>
+              <a href="/SpeechREC">Speech Recognition Tool</a>
+              <a href="/Translate">Text Translation Tool</a>
+            </div>
+        </div>
+    
+        <button type="button" class="btn btn-large btn-dark ml-auto"><a href="/"><i class="fas fa-home"></i></a></button>
+        <button type="button" class="btn btn-lg navbar-toggler-icon" onclick="openNav()"></button>
+      </nav>
+
+    <div class="container-fluid font">
+        <div class="container my-5">
+            <!-- Heading -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="cover-heading">Text Extraction Tool</h1>
+                </div>
+            </div>
+            <!-- Subheading -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="lead">The text extractor will allow you to extract text from any image.  
+                        You need upload an image and the tool will pull text from the image.Once extracted, 
+                        you can copy to your clipboard with one click.</p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="shadow-card px-3 card-bg">
+                        <div class="card-body p-0">
+                            <form method="POST" enctype="multipart/form-data" action="">
+                                <input type="file" name="file[]" id="file">
+                                <label for="file" class="text-center">
+        
+                                    <span class="icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+                                    <br>
+                                    <div class="btn-1">Browse File</div>
+                                    
+                                </label>
+        
+                                <br>
+                                <input 
+                                    type="submit" 
+                                    class="btn-1 btn-dark mt-4 w-100" 
+                                    value="Upload">
+                            </form>
+                        </div>
+                        <hr>
+                        <div class="card-body p-0 pb-2">
+        
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="mb-1">Extracted Text:</h4>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <div class="col-md-12 clearfix">
+                                    <textarea 
+                                        class="results" 
+                                        id="text" 
+                                        name="message[]" 
+                                        readonly 
+                                        >{% for file_name, text_file in files %}{{ text_file }}{% endfor %}</textarea>
+                                </div>
+                            </div>
+        
+                            <br>
+                            <div class="text-center">
+                                <button type="button" onclick="myFunction()" class="btn-1 btn-dark">
+                                    <span style="position: relative; left: 0;float: left;position: static;" class="mr-2">
+                                        <i class="fa fa-copy" style="font-size:24px"></i> 
+                                    </span>
+                                    <span style="font-size: 20px;"> COPY </span>
+                                </button>            
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <div class="jumbotron-fluid bg text-white font">
+        <div class="container">
+          <div class="row text-center">
+            <div class="col-xl-12">
+              <h1 class=" m-auto align-middle">TEXTIFY</h1>
+            </div>
+          </div>
+          <hr class="bg-light">
+          <div class="row justify-content-center text-center">
+            <div class="col-xl-4">
+              <p>Connect with us</p>
+              <ul class="justify-content-center">
+                <li class="list-inline-item"><a href="https://www.facebook.com/" style="color: #4267B2;"><i class="fab fa-facebook-f"></i></a></li>
+                <li class="list-inline-item"><a href="https://twitter.com/" style="color: #00acee;"><i class="fab fa-twitter"></i></a></li>
+                <li class="list-inline-item"><a href="https://www.instagram.com/" style="color: #d62976;"><i class="fab fa-instagram"></i></a></li>
+                <li class="list-inline-item"><a href="https://www.linkedin.com/" style="color: #0072b1;"><i class="fab fa-linkedin-in"></i></a></li>
+              </ul>
+            </div>
+    
+            <div class="col-xl-4">
+              <h4>Company</h4>
+              <p> Home </p>
+              <p> Contact us </p>
+              <p> About </p>
+            </div>
+          </div>
+          <hr class="bg-light">
+          <div class="row text-center">
+            <div class="col-xl-12">
+              &copy;
+              2023-2024
+            </div>
+          </div>
+        
+        </div>
+      </div>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/home.js') }}"></script>   
+    </body>
+    </html> 
+    

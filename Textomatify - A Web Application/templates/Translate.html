@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Text Translator Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='stylesheets/Translate.css') }}" />
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-xl navbar-dark no-bg">
+        <span class="icon-name"><strong>TEXTIFY</strong></span></a>
+
+    
+        <div id="mySidenav" class="sidenav bg-dark font">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="sidenav-content mt-5 ml-2">
+              <a href="/Extract_Text">Text Extraction Tool</a>
+              <a href="/SpeechREC">Speech Recognition Tool</a>
+              <a href="/Translate">Text Translation Tool</a>
+            </div>
+        </div>
+    
+        <button type="button" class="btn btn-large btn-dark ml-auto"><a href="/"><i class="fas fa-home"></i></a></button>
+        <button type="button" class="btn btn-lg navbar-toggler-icon" onclick="openNav()"></button>
+      </nav>
+
+    <div class="container-fluid font">
+
+        <div class="container my-5">
+
+            <!-- Heading -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="cover-heading">Text Translation Tool</h1>
+                </div>
+            </div>
+
+            <!-- Subheading -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="lead">The text translator will allow you to translate text from one language 
+                        to another. You may enter text and the tool will translate text to another language. 
+                        Once translated, you can copy text to your clipboard with one click.</p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card-bg shadow-card px-3">
+                        <form method="POST">
+                            <div class="card-body p-0 pt-2">
+                            <!-- Enter text to translate. -->
+                            <div class="form-group">
+                                <label for="text-to-translate"><strong>Enter the text you'd like to
+                                        translate:</strong></label>
+                                <textarea 
+                                    class="textarea border border-secondary" 
+                                    name="text-to-translate" 
+                                    id="text-to-translate" 
+                                    placeholder="Enter Text..." 
+                                    style="white-space: pre-line"></textarea>
+
+                                <!-- Select output language here. -->
+                                <div class="form-group">
+                                    <label class="pt-2" for="select-language"><strong>Translate to:</strong></label>
+                                    <select class="form-control select-language" name="select-language" id="select-language">
+                                        <option value="en">English</option>
+                                        <option value="hi">Hindi</option>
+                                        <option value="mr">Marathi</option>
+                                        <option value="gu">Gujarati</option>
+                                        <option value="ar">Arabic</option>
+                                        <option value="ru">Russian</option>
+                                        <option value="de">German</option>
+                                        <option value="ja">Japanese</option>
+                                        <option value="es">Spanish</option>
+                                        <option value="th">Thai</option>
+                                        <!-- <option value="fr">French</option>
+                                        <option value="ta">Tamil</option>
+                                        <option value="te">Telugu</option>
+                                        <option value="tr">Turkish</option>
+                                        <option value="ur">Urdu</option>
+                                        <option value="pa">Panjabi</option>
+                                        <option value="af">Afrikaans</option>
+                                        <option value="bn">Bengali</option>
+                                        <option value="zh-cn">Chinese(Simplified)</option>
+                                        <option value="zh-tw">Chinese(Traditional)</option>
+                                        <option value="el">Greek</option>
+                                        <option value="iw">Hebrew</option>
+                                        <option value="he">Hebrew</option>
+                                        <option value="hu">hungarian</option>
+                                        <option value="it">Italian</option>
+                                        <option value="ja">Japanese</option>
+                                        <option value="kn">Kannada</option>
+                                        <option value="ko">Korean</option>
+                                        <option value="la">Latin</option>
+                                        <option value="ml">Malayalam</option>
+                                        <option value="ne">Nepali</option>
+                                        <option value="or">Odia</option>
+                                        <option value="pl">Polish</option>
+                                        <option value="pt">Portuguese</option>
+                                        <option value="fa">Persian</option>
+                                        <option value="sr">Serbian</option>
+                                        <option value="sd">Sindhi</option>
+                                        <option value="sw">Swedish</option>
+                                        <option value="cy">Welsh</option>
+                                        <option value="xh">xhosa</option>
+                                        <option value="zu">Zulu</option>
+                                        <option value="sm">Samoan</option>
+                                        <option value="ro">Romanian</option>
+                                        <option value="mn">Mangolian</option>
+                                        <option value="ga">Irish</option>
+                                        <option value="id">idonesian</option>
+                                        <option value="is">Icelandic</option>
+                                        <option value="fi">Finnish</option>
+                                        <option value="tl">filipino</option>
+                                        <option value="da">Danish</option>
+                                        <option value="nl">Dutch</option>
+                                        <option value="bg">Bulgarian</option> -->
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn-dark btn-1 w-100" id="translate">Translate text</button>
+                                
+                            </div>
+                            </div>
+                            <hr>
+                            <div class="card-body p-0 pb-2">
+
+                                <form>
+                                    <div class="form-group" id="translator-text-response">
+                                        <label for="translation-result"><strong>Translated text:</strong></label>
+                                        <textarea 
+                                            class="results" 
+                                            id="translation_results"
+                                            placeholder="Translating..." 
+                                            readonly
+                                            style="white-space: pre-line">{{ translation_result }}</textarea>
+                                    </div>
+                                </form>
+
+                                <div class="text-center">
+                                    <button type="button" onclick="myFunction()" class="btn-1 btn-dark">
+                                        <span style="position: relative; left: 0;float: left;position: static;" class="mr-2">
+                                            <i class="fa fa-copy" style="font-size:24px"></i> 
+                                        </span>
+                                        <span style="font-size: 20px;"> COPY </span>
+                                    </button>            
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="jumbotron-fluid bg text-white font">
+        <div class="container">
+          <div class="row text-center">
+            <div class="col-xl-12">
+              <h1 class=" m-auto align-middle">TEXTIFY</h1>
+            </div>
+          </div>
+          <hr class="bg-light">
+          <div class="row justify-content-center text-center">
+            <div class="col-xl-4">
+              <p>Connect with us</p>
+              <ul class="justify-content-center">
+                <li class="list-inline-item"><a href="https://www.facebook.com/" style="color: #4267B2;"><i class="fab fa-facebook-f"></i></a></li>
+                <li class="list-inline-item"><a href="https://twitter.com/" style="color: #00acee;"><i class="fab fa-twitter"></i></a></li>
+                <li class="list-inline-item"><a href="https://www.instagram.com/" style="color: #d62976;"><i class="fab fa-instagram"></i></a></li>
+                <li class="list-inline-item"><a href="https://www.linkedin.com/" style="color: #0072b1;"><i class="fab fa-linkedin-in"></i></a></li>
+              </ul>
+            </div>
+    
+            <div class="col-xl-4">
+              <h4>Company</h4>
+              <p> Home </p>
+              <p> Contact US </p>
+              <p> About </p>
+            </div>
+          </div>
+          <hr class="bg-light">
+          <div class="row text-center">
+            <div class="col-xl-12">
+              &copy;
+              2023-2024
+            </div>
+          </div>
+        
+        </div>
+      </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/Translate.js') }}"></script>
+
+</body>
+</html>
